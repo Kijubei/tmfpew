@@ -46,25 +46,29 @@ body {
 }
 
 .navigation-list {
-	//position: fixed;
+	position: fixed;
 	left: 0px;
 	float: left;
 	margin: 0 20px 0 0px;
 	padding: 10px 10px 10px 10px;
 	top: 50%;
-	transform: translateY(-25%);
+	transform: translateY(-50%);
+	max-height: 650px;
+	width: 210px;
+	overflow: auto;
+}
+
+.navigation-sublist {
+	list-style-type: none;
+	margin: 3px 0 0 0;
 }
 
 .navigation-list-item {
 	list-style-type: none;
 	margin: 3px 0 0 0;
-}
-
-.navigation-list-item-sub {
-	list-style-type: none;
-	margin: 3px 0 0 0;
 	padding: 0 0 0 20px;
 	font-size: 13px;
+	display: none;
 }
 
 .floatingbutton {
