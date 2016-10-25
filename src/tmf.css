@@ -1,0 +1,177 @@
+body {
+	font-family: sans-serif;
+
+	background-color: #CEDADE;
+}
+
+#main {
+	width: 900px;
+	margin: 0 auto;
+}
+
+#tmf-logo {
+	float: left;
+}
+
+#headline {
+	margin-left: 200px;
+}
+
+#tmfcontent {
+	background-color: white;
+	padding: 15px 15px 15px 15px;
+	box-shadow: 4px 4px 4px #333;
+	border: 2px solid grey;
+	margin-left: 200px;
+}
+
+#wikicontainer {
+	margin: 15px 15px 15px 15px;
+}
+
+#wikicontainer p {
+	line-height: 1.5em;
+	text-indent: 20px;
+}
+
+#comments {
+	width: 450px;
+	margin: 0 auto;
+}
+
+#comments textarea{
+	height: 150px;
+	width: 450px;
+	padding: 15px 15px 15px 15px;
+}
+
+.navigation-list {
+	//position: fixed;
+	left: 0px;
+	float: left;
+	margin: 0 20px 0 0px;
+	padding: 10px 10px 10px 10px;
+	top: 50%;
+	transform: translateY(-25%);
+}
+
+.navigation-list-item {
+	list-style-type: none;
+	margin: 3px 0 0 0;
+}
+
+.navigation-list-item-sub {
+	list-style-type: none;
+	margin: 3px 0 0 0;
+	padding: 0 0 0 20px;
+	font-size: 13px;
+}
+
+.floatingbutton {
+	background-color: #FFF;
+	border-radius: 15px;
+	text-align: center;
+	width: 158px;
+	height: 28px;
+	padding: 0 7px 0 7px;
+	line-height: 30px;
+	box-shadow: 2px 2px 2px #333;
+	border: 2px solid grey;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.navigation-link {
+	color: black;
+	float: left;
+	text-decoration: none;
+}
+
+.navigation-link span{
+}
+
+.navigation-link:hover {
+	background-color: yellow;
+}
+
+#hidden-source{
+		visibility: hidden;
+}
+
+#actionbar {
+	position: relative;
+	width: 300px;
+	margin: 0 auto;
+}
+
+
+.actionbar-list {
+	position: fixed;
+	bottom: 0px;
+	list-style: none;
+}
+
+
+.actionbar-list-item {
+	float: left;
+	width: 74px;
+}
+
+
+.actionbar-list-item a{
+	text-decoration: none;
+	margin-left: 5px;
+	width: 50px;
+	float: left;
+	color:black;
+}
+
+.actionbar-list-item a:hover{
+	background-color: yellow;
+}
+
+
+#dragdrop {
+	width: 700px;
+	height: 400px;
+	margin: 15px auto;
+	border: 3px solid grey;
+	border-radius: 20px;
+}
+
+#dragdrop p{
+	line-height: 400px;
+	text-align: center;
+}
+
+#neu {
+	position: relative;
+	width: 200px;
+	margin-left: auto;
+	margin-right: auto;
+	list-style: none;
+}
+
+#neu a{
+	text-decoration: none;
+	margin-left: 5px;
+	width: 150px;
+	float: left;
+	color: black;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.clearfix {display: inline-block;}
+
+/* Hides from IE-mac \*/
+* html .clearfix {height: 1%;}
+.clearfix {display: block;}
+/* End hide from IE-mac */
