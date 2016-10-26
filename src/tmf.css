@@ -63,6 +63,10 @@ body {
 	margin: 3px 0 0 0;
 }
 
+.navigation-sublist:hover {
+	background-color: yellow;
+}
+
 .navigation-list-item {
 	list-style-type: none;
 	margin: 3px 0 0 0;
@@ -81,15 +85,15 @@ body {
 	line-height: 30px;
 	box-shadow: 2px 2px 2px #333;
 	border: 2px solid grey;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
 }
 
 .navigation-link {
 	color: black;
 	float: left;
 	text-decoration: none;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .navigation-link span{

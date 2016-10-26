@@ -26,7 +26,7 @@ $(document).ready(function () {
 
 		// Die Überschriften Klappen weitere Items auf
 		$('.navigation-sublist').click(function() {
-			$('.navigation-item').slideDown();
+			$('.navigation-list-item').slideToggle();
 		});
 
 		function buildMenu() {
@@ -53,8 +53,8 @@ $(document).ready(function () {
 				}
 			});
 
-			$(".navigation-sublist").addClass("navigation-link floatingbutton"); // css an das neue li
-			$(".navigation-list-item-sub a").addClass("navigation-link floatingbutton"); // css an das neue li
+			$(".navigation-sublist").addClass("floatingbutton"); // css an das neue li
+			$(".navigation-list-item a").addClass("navigation-link floatingbutton"); // css an das neue li
 
 		}
 
