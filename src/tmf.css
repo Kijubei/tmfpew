@@ -48,23 +48,18 @@ body {
 .navigation-list {
 	position: fixed;
 	left: 0px;
-	float: left;
-	margin: 0 20px 0 0px;
-	padding: 10px 10px 10px 10px;
+	padding: 0px 10px 0px 10px;
 	top: 50%;
 	transform: translateY(-50%);
 	max-height: 650px;
-	width: 210px;
+	width: 230px;
 	overflow: auto;
 }
 
 .navigation-sublist {
 	list-style-type: none;
 	margin: 3px 0 0 0;
-}
-
-.navigation-sublist:hover {
-	background-color: yellow;
+	padding: 0px 0px 0px 0px;
 }
 
 .navigation-list-item {
@@ -76,35 +71,36 @@ body {
 }
 
 .floatingbutton {
+	display:block; /*damit width/height funktionieren;*/
+	width: 158px;
+	height: 28px;
+
+	/* aussehen; */
 	background-color: #FFF;
 	border-radius: 15px;
 	text-align: center;
-	width: 158px;
-	height: 28px;
-	padding: 0 7px 0 7px;
-	line-height: 30px;
+	line-height: 26px;
 	box-shadow: 2px 2px 2px #333;
 	border: 2px solid grey;
+	padding: 0 7px 0 7px;
+
+	/*damit text abgeschnitten wird; */
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.floatingbutton:hover {
+	background-color: yellow;
 }
 
 .navigation-link {
 	color: black;
-	float: left;
 	text-decoration: none;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-
-.navigation-link span{
-}
-
-.navigation-link:hover {
-	background-color: yellow;
 }
 
 #hidden-source{
-		visibility: hidden;
+		display: none;
 }
 
 #actionbar {
@@ -141,8 +137,6 @@ body {
 
 
 #dragdrop {
-	width: 700px;
-	height: 400px;
 	margin: 15px auto;
 	border: 3px solid grey;
 	border-radius: 20px;

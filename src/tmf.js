@@ -7,14 +7,15 @@ $(document).ready(function () {
 	}
 
 	//Übersichtsliste in seite laden (erst danach alles ausführen)
+	// für development:
 	$("#hidden-source").load("http://localhost/HTMLtransfer/wikiseiten/%C3%9Cbersicht%20%E2%80%93%20pew%20TMF.htm #mw-content-text", function() {
-
+	//für live:
+	//$("#hidden-source").load("https://vf-mi.virt.uni-oldenburg.de/mediawiki/%C3%9Cbersicht #mw-content-text", function() {
 		// das menu wird gebaut
 		buildMenu();
 
 
 		//Sachen von der jeweiligen Wiki Seite in  div laden
-		// BROKEN ?
 		$(".navigation-link").click(function() {
 			var url = $(this).attr("href");
 			//alert(url);
@@ -26,7 +27,9 @@ $(document).ready(function () {
 
 		// Die Überschriften Klappen weitere Items auf
 		$('.navigation-sublist').click(function() {
-			$('.navigation-list-item').slideToggle();
+			//$('.navigation-list-item').slideToggle("slow");
+    		$(this).children(".navigation-list-item").slideToggle("slow");
+
 		});
 
 		function buildMenu() {
@@ -42,7 +45,12 @@ $(document).ready(function () {
 					if (this.tagName == "H3") {
 						
 						// ein neues ul an die navi hängen, das die klasse sublist hat und den inhalt von der quelle nimmt (nur mw-headline)
-						$(".navigation-list").append($("<ul></ul>").addClass('navigation-sublist').append($(".mw-headline",$(this)).html()) );
+						$(".navigation-list").append(
+							$("<ul></ul>").addClass('navigation-sublist').append(
+								$("<div></div>").addClass("floatingbutton").append(
+									$(".mw-headline",$(this)).html()) 
+							)
+						);
 						h3Html[i-1] = $(this).html();
 						
 					} else if (this.tagName == "P") {
@@ -53,7 +61,7 @@ $(document).ready(function () {
 				}
 			});
 
-			$(".navigation-sublist").addClass("floatingbutton"); // css an das neue li
+			//$(".navigation-sublist").addClass("floatingbutton"); // css an das neue li
 			$(".navigation-list-item a").addClass("navigation-link floatingbutton"); // css an das neue li
 
 		}
