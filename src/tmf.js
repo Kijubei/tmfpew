@@ -6,36 +6,19 @@ $(document).ready(function () {
 	    return true;
 	}
 
-	//Übersichtsliste in seite laden (erst danach alles ausführen)
 	// für development:
-	$("#hidden-source").load("http://localhost/HTMLtransfer/wikiseiten/%C3%9Cbersicht%20%E2%80%93%20pew%20TMF.htm #mw-content-text", function() {
+	//var wikiUrl = "http://localhost/HTMLtransfer/wikiseiten/%C3%9Cbersicht%20%E2%80%93%20pew%20TMF.htm";
 	//für live:
-	//$("#hidden-source").load("https://vf-mi.virt.uni-oldenburg.de/mediawiki/%C3%9Cbersicht #mw-content-text", function() {
-		// das menu wird gebaut
-		buildMenu();
+	var wikiUrl = "https://vf-mi.virt.uni-oldenburg.de/mediawiki/%C3%9Cbersicht";
+	buildMenu(wikiUrl);
 
+	// baut das Menu abhängig von der mitgegebenen wiki übersichtsseiten url
+	function buildMenu(url) {
 
-		//Sachen von der jeweiligen Wiki Seite in  div laden
-		$(".navigation-link").click(function() {
-			var url = $(this).attr("href");
-			//alert(url);
-			$("#wikicontainer").load(url + " #content");
-			//$(this).load(url + " .firstHeading");
-			return false;
-		});
+		//Übersichtsliste in seite laden (erst danach alles ausführen)
+		$("#hidden-source").load(url+ " #mw-content-text", function() {
 
-
-		// Die Überschriften Klappen weitere Items auf
-		$('.navigation-sublist').click(function() {
-			//$('.navigation-list-item').slideToggle("slow");
-    		$(this).children(".navigation-list-item").slideToggle("slow");
-
-		});
-
-		function buildMenu() {
-
-			var h3Html = new Array;
-			var pHtml = new Array;
+			// das menu wird gebaut
 			// Hänge für jedes Item ausser dem ersten ein li an die navi liste
 			$("#mw-content-text").children().each(function(i, ele){
 				if (i == 0) {
@@ -51,12 +34,10 @@ $(document).ready(function () {
 									$(".mw-headline",$(this)).html()) 
 							)
 						);
-						h3Html[i-1] = $(this).html();
 						
 					} else if (this.tagName == "P") {
 						// ein neues li an die navi hängen, das die klasse item hat und den inhalt von der quelle nimmt
 						$(".navigation-sublist:last").append($("<li></li>").addClass('navigation-list-item').append($(this).html()) );
-						pHtml[i-1] = $(this).html();
 					}
 				}
 			});
@@ -64,8 +45,23 @@ $(document).ready(function () {
 			//$(".navigation-sublist").addClass("floatingbutton"); // css an das neue li
 			$(".navigation-list-item a").addClass("navigation-link floatingbutton"); // css an das neue li
 
-		}
+			
 
-	});
+			// Die Überschriften Klappen weitere Items auf
+			$('.navigation-sublist').click(function() {
+				//$('.navigation-list-item').slideToggle("slow");
+				$(this).children(".navigation-list-item").slideToggle("slow");
+			});
+
+			//Sachen von der jeweiligen Wiki Seite in  div laden
+			$(".navigation-link").click(function() {
+				var url = $(this).attr("href");
+				$("#wikicontainer").load(url + " #content");
+				return false;
+			});
+
+		});
+
+	}
 
 });
