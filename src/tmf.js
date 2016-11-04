@@ -41,7 +41,7 @@ $(document).ready(function () {
 					} else if (this.tagName == "P") {
 						// ein neues li an die neuste sublist der navi hängen, das die klasse item hat und den inhalt von der quelle nimmt
 						$(".navigation-sublist:last").append( // an die letzte sublist
-							$("<li></li>").addClass('navigation-list-item').attr("id", "list-Item"+i).append( // ein li anhängen mit der klasse list-item
+							$("<li></li>").addClass('navigation-list-item').attr("id", "list-Item"+i).append( // ein li anhängen mit der klasse list-item und einer ID
 								$(this).html())  // mit dem inhalt aus der quelle
 						);
 					}
@@ -72,14 +72,14 @@ $(document).ready(function () {
 	}
 
 	// favorite-button
-	$("#favorite").click(favorItem(currentId));
+	$("#favorite").click(function() {
+	        favorItem(currentId)
+	});
 
 
 	function favorItem(itemId) {
-		// im Buildmenu jedem list-item eine ID geben
-		// diese ID dann in einer globalen var speichern wenn die nav-link click funktion aufgerufen wird
-		
-		$("#"+itemId).css("border-color: orange;");
+	        $("#"+itemId).children().css("border-color", "orange");
 	}
+
 
 });
