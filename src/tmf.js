@@ -10,6 +10,9 @@ $(document).ready(function () {
 	//var wikiUrl = "http://localhost/HTMLtransfer/wikiseiten/%C3%9Cbersicht%20%E2%80%93%20pew%20TMF.htm";
 	//für live:
 	var wikiUrl = "https://vf-mi.virt.uni-oldenburg.de/mediawiki/%C3%9Cbersicht";
+
+	var currentId;
+
 	buildMenu(wikiUrl);
 
 	// baut das Menu abhängig von der mitgegebenen wiki übersichtsseiten url
@@ -27,17 +30,20 @@ $(document).ready(function () {
 					// unterscheidung
 					if (this.tagName == "H3") {
 						
-						// ein neues ul an die navi hängen, das die klasse sublist hat und den inhalt von der quelle nimmt (nur mw-headline)
-						$(".navigation-list").append(
-							$("<ul></ul>").addClass('navigation-sublist').append(
-								$("<div></div>").addClass("floatingbutton").append(
-									$(".mw-headline",$(this)).html()) 
+						// ein neues ul an die navi hängen, das die klasse sublist hat und den inhalt (in einem div) von der quelle nimmt (nur mw-headline)
+						$(".navigation-list").append( //hänge an die navi an ...
+							$("<ul></ul>").addClass('navigation-sublist').append( // eine ul mit der klasse sublist
+								$("<div></div>").addClass("floatingbutton").append( // hänge daran ein div der klasse floatingbutton
+									$(".mw-headline",$(this)).html()) // mit dem inhalt aus der quelle mw-headline
 							)
 						);
 						
 					} else if (this.tagName == "P") {
-						// ein neues li an die navi hängen, das die klasse item hat und den inhalt von der quelle nimmt
-						$(".navigation-sublist:last").append($("<li></li>").addClass('navigation-list-item').append($(this).html()) );
+						// ein neues li an die neuste sublist der navi hängen, das die klasse item hat und den inhalt von der quelle nimmt
+						$(".navigation-sublist:last").append( // an die letzte sublist
+							$("<li></li>").addClass('navigation-list-item').attr("id", "list-Item"+i).append( // ein li anhängen mit der klasse list-item
+								$(this).html())  // mit dem inhalt aus der quelle
+						);
 					}
 				}
 			});
@@ -57,11 +63,23 @@ $(document).ready(function () {
 			$(".navigation-link").click(function() {
 				var url = $(this).attr("href");
 				$("#wikicontainer").load(url + " #content");
+				currentId = $(this).parent().attr("id");
 				return false;
 			});
 
 		});
 
+	}
+
+	// favorite-button
+	$("#favorite").click(favorItem(currentId));
+
+
+	function favorItem(itemId) {
+		// im Buildmenu jedem list-item eine ID geben
+		// diese ID dann in einer globalen var speichern wenn die nav-link click funktion aufgerufen wird
+		
+		$("#"+itemId).css("border-color: orange;");
 	}
 
 });
