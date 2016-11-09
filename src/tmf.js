@@ -7,7 +7,7 @@ $(document).ready(function () {
 	}
 
 	// für development:
-	//var wikiUrl = "http://localhost/HTMLtransfer/wikiseiten/%C3%9Cbersicht%20%E2%80%93%20pew%20TMF.htm";
+	//var wikiUrl = "http://localhost/tmfpew/wikiseiten/%C3%9Cbersicht%20%E2%80%93%20pew%20TMF.htm";
 	//für live:
 	var wikiUrl = "https://vf-mi.virt.uni-oldenburg.de/mediawiki/%C3%9Cbersicht";
 
@@ -73,10 +73,10 @@ $(document).ready(function () {
 
 	// favorite-button
 	$("#favorite").click(function() {
-	        favorItem(currentId)
+		favorItem(currentId);
 	});
 
-
+	// funktion bekommt eine item ID, sucht danach und gibt deren kind (also den link, bzw den button) einen orangen rand
 	function favorItem(itemId) {
 	        $("#"+itemId).children().css("border-color", "orange");
 	}
