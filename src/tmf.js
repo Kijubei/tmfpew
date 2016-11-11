@@ -7,20 +7,27 @@ $(document).ready(function () {
 	}
 
 	// für development:
-	//var wikiUrl = "http://localhost/tmfpew/wikiseiten/%C3%9Cbersicht%20%E2%80%93%20pew%20TMF.htm";
+	var wikiUrl = "http://localhost/tmfpew/wikiseiten/%C3%9Cbersicht%20%E2%80%93%20pew%20TMF.htm";
 	//für live:
-	var wikiUrl = "https://vf-mi.virt.uni-oldenburg.de/mediawiki/%C3%9Cbersicht";
+	//var wikiUrl = "https://vf-mi.virt.uni-oldenburg.de/mediawiki/%C3%9Cbersicht";
 
-	var currentId;
+	// Speichert die aktuelle itemID
+	var currentItemId;
+
+	// Speichert welche Seiten favorisiert sind und was in dem Textfeldern steht
+	var saveSession = [];
 
 	buildMenu(wikiUrl);
 
 	// baut das Menu abhängig von der mitgegebenen wiki übersichtsseiten url
+	// WICHTIG: Weil viele klassen und ID's erst nach der Menuerstellung existieren, müssen viele funktionen hier rein,
+	// um sicherzustellen, dass diese nach dem load passieren
 	function buildMenu(url) {
 
 		//Übersichtsliste in seite laden (erst danach alles ausführen)
 		$("#hidden-source").load(url+ " #mw-content-text", function() {
-
+			// Speichern welches Menu genutzt wird
+			saveSession["url"] = url;
 			// das menu wird gebaut
 			// Hänge für jedes Item ausser dem ersten ein li an die navi liste
 			$("#mw-content-text").children().each(function(i, ele){
@@ -41,7 +48,7 @@ $(document).ready(function () {
 					} else if (this.tagName == "P") {
 						// ein neues li an die neuste sublist der navi hängen, das die klasse item hat und den inhalt von der quelle nimmt
 						$(".navigation-sublist:last").append( // an die letzte sublist
-							$("<li></li>").addClass('navigation-list-item').attr("id", "list-Item"+i).append( // ein li anhängen mit der klasse list-item und einer ID
+							$("<li></li>").addClass('navigation-list-item').attr("id", "list-item"+i).append( // ein li anhängen mit der klasse list-item und einer ID
 								$(this).html())  // mit dem inhalt aus der quelle
 						);
 					}
@@ -59,11 +66,28 @@ $(document).ready(function () {
 				$(this).children(".navigation-list-item").slideToggle("slow");
 			});
 
+			// baue die Variable um die Session zu speichern
+			$(".navigation-list-item").each(function(index, value) {
+				saveSession[$(value).attr("id")] = [false, ""]; // erstelle object mit allen ID's das jeweils speichern kann ob fav / text
+			});
+
+
+			//textfeld leeren weil es bei F5 sonst noch gefüllt ist
+			$("#textfeld textarea").val("");
+			
 			//Sachen von der jeweiligen Wiki Seite in  div laden
 			$(".navigation-link").click(function() {
-				var url = $(this).attr("href");
-				$("#wikicontainer").load(url + " #content");
-				currentId = $(this).parent().attr("id");
+				var itemUrl = $(this).attr("href"); // hole url von dem geklickten Item
+				
+				//wenn keine itemID gemerkt ignore
+				if (currentItemId != null) {
+					//aktuelles textfeld speichern
+					saveSession[currentItemId][1] = $("#textfeld textarea").val();
+				} 
+				
+				$("#wikicontainer").load(itemUrl + " #content"); //wiki reinladen
+				currentItemId = $(this).parent().attr("id"); //momentane itemID merken
+				$("#textfeld textarea").val(saveSession[currentItemId][1]); // textfeld laden
 				return false;
 			});
 
@@ -73,12 +97,25 @@ $(document).ready(function () {
 
 	// favorite-button
 	$("#favorite").click(function() {
-		favorItem(currentId);
+		favorItem(currentItemId);
 	});
 
-	// funktion bekommt eine item ID, sucht danach und gibt deren kind (also den link, bzw den button) einen orangen rand
+	// save-button
+	$("#save").click(function() {
+		var test = JSON.stringify(saveSession);
+		alert(test);
+	});
+
+	// funktion bekommt eine item ID, sucht danach und gibt deren kind (also den link, bzw den button) einen orangen rand / oder macht ihn weg
 	function favorItem(itemId) {
-	        $("#"+itemId).children().css("border-color", "orange");
+			if (saveSession[itemId][0] == false) { // nicht fav
+				$("#"+itemId).children().css("border-color", "orange"); // mach rand orange
+				saveSession[itemId][0] = true;
+			} else {
+				$("#"+itemId).children().css("border-color", "grey"); // mach rand orange
+				saveSession[itemId][0] = false;
+			}
+	        
 	}
 
 

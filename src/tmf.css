@@ -34,12 +34,12 @@ body {
 	text-indent: 20px;
 }
 
-#comments {
+#textfeld {
 	width: 450px;
 	margin: 0 auto;
 }
 
-#comments textarea{
+#textfeld textarea{
 	height: 150px;
 	width: 450px;
 	padding: 15px 15px 15px 15px;
