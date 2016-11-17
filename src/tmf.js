@@ -90,6 +90,7 @@ $(document).ready(function () {
 	// favorite-button
 	$("#favorite").click(function() {
 		favorItem(currentItemId);
+		return false;
 	});
 
 	// save-button: erzeugt eine JSON Datei mit texten im textfeld und welche items faviorisiert wurden
