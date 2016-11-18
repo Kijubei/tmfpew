@@ -6,11 +6,11 @@ $(document).ready(function () {
 	    return true;
 	}
 
+	// bekommt die Url aus dem Storage von dem new button (siehe unten)
+	var wikiUrl = sessionStorage.wikiUrl;
 	// für development:
-	//var wikiUrl = "http://localhost/tmfpew/wikiseiten/%C3%9Cbersicht%20%E2%80%93%20pew%20TMF.htm";
-	//für live:
-	var wikiUrl = "https://vf-mi.virt.uni-oldenburg.de/mediawiki/%C3%9Cbersicht";
-
+	//wikiUrl = "http://localhost/tmfpew/wikiseiten/%C3%9Cbersicht%20%E2%80%93%20pew%20TMF.htm";
+	
 	// Speichert die aktuelle itemID
 	var currentItemId;
 
@@ -102,13 +102,17 @@ $(document).ready(function () {
 		$("#save").attr("download", "session.json"); // legt fest wie die datei heißen soll
 	});
 
+	$("#neu").click(function() {
+		sessionStorage.wikiUrl = "https://vf-mi.virt.uni-oldenburg.de/mediawiki/%C3%9Cbersicht";
+	});
+
 	// funktion bekommt eine item ID, sucht danach und gibt deren kind (also den link, bzw den button) einen orangen rand / oder macht ihn weg
 	function favorItem(itemId) {
 			if (saveSession[itemId][0] == false) { // nicht fav
 				$("#"+itemId).children().css("border-color", "orange"); // mach rand orange
 				saveSession[itemId][0] = true;
 			} else {
-				$("#"+itemId).children().css("border-color", "grey"); // mach rand orange
+				$("#"+itemId).children().css("border-color", "grey"); // mach wieder grau orange
 				saveSession[itemId][0] = false;
 			}
 	        
@@ -121,6 +125,7 @@ $(document).ready(function () {
 			saveSession[currentItemId][1] = $("#textfeld textarea").val();
 		} 
 	}
+
 
 
 });

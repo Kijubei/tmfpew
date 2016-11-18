@@ -18,12 +18,14 @@
 		<div id="tmfcontent" class="clearfix">
 			
 			
-			<div id="dragdrop">
+			<form action="view.php" id="dragdrop" method="post" enctype="multipart/form-data">
 				<p> Zum fortsetzen bitte ihre gespeicherte Datei reinziehen</p>	
+				<input type="file" name="session" accept=".json">
+				<input type="submit">
 			</div>
 
 			<div id="neu" >
-				<a href="view.html" class="floatingbutton">Neue Session</a>
+				<a href="view.php" class="floatingbutton">Neue Session</a>
 			</div>
 		</div>
 	</div>

@@ -17,6 +17,8 @@
 		<h1 id="headline">Patienteneinwilligungswiki</h1>
 		</div>
 
+		<?php readfile($_FILES["session"]['tmp_name']); ?><br>
+
 		<div id="tmfcontent" class="clearfix">
 			<div id="wikicontainer">
 				<h1>Lorem ipsum</h1>
