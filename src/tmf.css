@@ -139,16 +139,18 @@ body {
 	margin: 15px auto;
 	border: 3px solid grey;
 	border-radius: 20px;
+	padding: 200px;
 }
 
 #dragdrop p{
-	line-height: 400px;
 	text-align: center;
+	color: grey;
+	font-size: 0.9vw;
 }
 
 #neu {
 	position: relative;
-	width: 200px;
+	width: 0px;
 	margin-left: auto;
 	margin-right: auto;
 	list-style: none;

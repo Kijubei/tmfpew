@@ -140,6 +140,9 @@ $(document).ready(function () {
 				return false; //damit keine normale link funktionalität unternommen wird
 			});
 
+			// erstes Item Laden
+			$("#wikicontainer").load($(".navigation-link").attr("href") + " #content");
+
 		});
 
 	}
