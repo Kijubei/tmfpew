@@ -49,7 +49,7 @@
 			</li>
 			<li class="actionbar-list-item " >
 			
-				<a href="#"  id="pdf-export" class="floatingbutton">export</a>
+				<a href="#"  id="word-export" class="floatingbutton">export</a>
 			</li>
 			<li class="actionbar-list-item " >
 			

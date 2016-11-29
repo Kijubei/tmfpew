@@ -9,7 +9,7 @@ $(document).ready(function () {
 	// bekommt die Url aus dem Storage von dem new button (siehe unten). Wichtig wenn es unterschiedliche Übersichtsseiten gibt.
 	var wikiUrl = sessionStorage.wikiUrl;
 	// für development:
-	//wikiUrl = "http://localhost/tmfpew/wikiseiten/%C3%9Cbersicht%20%E2%80%93%20pew%20TMF.htm";
+	wikiUrl = "http://localhost/tmfpew/wikiseiten/%C3%9Cbersicht%20%E2%80%93%20pew%20TMF.htm";
 	
 	// Speichert die aktuelle itemID
 	var currentItemId;
@@ -47,9 +47,14 @@ $(document).ready(function () {
 		sessionStorage.wikiUrl = "https://vf-mi.virt.uni-oldenburg.de/mediawiki/%C3%9Cbersicht";
 	});
 
-	// Upload button (bisher nicht genutzt)
-	$('#upload').on('click', function() {
-		
+	// Export von Word Datei von Allen Textfeldern
+	$('#word-export').on('click', function() {
+		$.ajax({
+		   url: 'export2.php',
+		   success: function (file) {//response is value returned from php (for your example it's "bye bye"
+		     window.location=file;
+		   }
+		});
 	});
 
 	//// FUNKTIONEN
