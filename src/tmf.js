@@ -48,13 +48,18 @@ $(document).ready(function () {
 	});
 
 	// Export von Word Datei von Allen Textfeldern
-	$('#word-export').on('click', function() {
+	$('#word-export').click(function() {
 		$.ajax({
-		   url: 'export2.php',
+		   url: 'export.php',
+		   type: "post",
+		   data: saveSession,
 		   success: function (file) {//response is value returned from php (for your example it's "bye bye"
-		     window.location=file;
+				//alert(file);
+				$("#word-export").attr("href", "data:text/plain, test123"); // ändert die href des save buttons in den tatsächlichen inhalt den wir laden wollen (funzt echt)
+				
 		   }
 		});
+		$("#word-export").attr("download", "Beispiel.docx"); // legt fest wie die datei heißen soll
 	});
 
 	//// FUNKTIONEN
