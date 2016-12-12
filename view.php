@@ -21,7 +21,12 @@
 		// evtl unsicher, dies ist evtl nur eine vorläufige version
 		// hier wird die hochgeladene datei von php nach js gereicht. sonderzeichen werden so gut es geht abgefangen.
 		// Der Rest sollte dann in js abgefangen werden. Es wird getestet ob das reicht.
-	 	var loadedSession = <?php echo json_encode(file_get_contents($_FILES["session"]['tmp_name']), JSON_HEX_QUOT|JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS);?>;
+	 	var loadedSession = <?php if (!empty($_FILES)) {
+	 		echo json_encode(file_get_contents($_FILES["session"]['tmp_name']), JSON_HEX_QUOT|JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS);
+	 	} else {
+	 		echo "";
+	 	}
+	 	?>;
 		</script>
 		
 
@@ -39,7 +44,7 @@
 	
 
 	<!-- Hier wird die Übersichtsseite reingeladen um daraus die Navi zu bauen -->
-	<div id="hidden-source"></div>
+	<div id=wikisource class="hidden-source"></div>
 
 	<div id="actionbar">
 		
@@ -48,8 +53,9 @@
 				<a href="#"  id="save" class="floatingbutton">save</a>
 			</li>
 			<li class="actionbar-list-item " >
-			
-				<a href="#"  id="word-export" class="floatingbutton">export</a>
+				<form action="export.php" method="post" id="export-form" enctype="multipart/form-data">
+					<a id="word-export" href="#" class="floatingbutton">export</a>
+					<input id="inputSession" class="hidden-source" type="text" name="inputSession" value="">
 			</li>
 			<li class="actionbar-list-item " >
 			

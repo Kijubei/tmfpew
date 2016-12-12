@@ -1,7 +1,11 @@
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+
 <?php
+
 
 require_once 'PHPWord.php';
 
+ini_set('default_charset', 'WINDOWS-1252');
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -10,25 +14,53 @@ error_reporting(E_ALL);
 
 //var_dump($savedSession);
 
-$test = $_POST;
-
-//echo "neu ist: " . $test;
-
-var_dump($test);
 
 $val = 1;
 
 $lname = "test";
+;
 
 $fname = "jojo";
 
-createDocument($val_q1, $lname, $fname);
+createDocument($val, $lname, $fname);
 
 
 function createDocument($val, $lname, $fname) {
 
+	////////////////////////////
+
+	$test = $_POST["inputSession"];
+
+	//echo "neu ist: " . $test;
+
+	$demo = array(
+	    "bool" => false,
+	    "int" => 1,
+	    "float" => 3.14,
+	    "string" => "hello world",
+	    "array" => array(),
+	    "object" => new stdClass(),
+	    "resource" => tmpfile(),
+	    "null" => null,
+	);
+
+	//$exportTest = $_POST[""]
+
+	$theSession = var_export($_POST, true);
+
+	// var_export -- nice, one-liner
+	$debug_export = var_export($demo, true);
+
+	$printr = print_r($demo, true);
+
+	/////////////////////////////////////////////////
+
+
+
 	// New Word Document
 	$PHPWord = new PHPWord();
+
+	$PHPWord->getCompatibility()->setOoxmlVersion(14);
 
 	// New portrait section
 	$section = $PHPWord->createSection();
@@ -39,7 +71,7 @@ function createDocument($val, $lname, $fname) {
 	//$header->addText("Abteilung Medizinische Informatik\nDepartment für Versorgungsforschung\nFakultät für Medizin und Gesundheitswissenschaften\nCarl von Ossietzky Universität Oldenburg");
 	$table = $header->addTable();
 	$table->addRow();
-	$table->addCell(50)->addImage('uni_ol_logo.png', array('width'=>110, 'height'=>110, 'align'=>'left'));
+	//$table->addCell(50)->addImage('uni_ol_logo.png', array('width'=>110, 'height'=>110, 'align'=>'left'));
 	$table->addCell(1000)->addText("Abteilung Medizinische Informatik\nDepartment für Versorgungsforschung\nFakultät für Medizin und Gesundheitswissenschaften\nCarl von Ossietzky Universität Oldenburg");
 
 	// Add footer
@@ -51,7 +83,24 @@ function createDocument($val, $lname, $fname) {
 	$section->addText("Antwort: $val");
 	$section->addText("Nachname: $lname");
 	$section->addText("Vorname: $fname");
-	
+
+	///////////////////// DEBUG
+	//$section->addText("printr: " . $printr);
+	$section->addText("printr-echo: $printr");
+
+	//$section->addText("debug_export: ".$debug_export);
+	$section->addText("debug_export: $debug_export");
+
+	$section->addText("theSession: $theSession");
+	$section->addText("test: $test");
+
+	$section->addText("demo[string]: $demo[string]");
+	//$section->addText("demo[string]: $demo["string"]");
+	$section->addText("demo[string]: ". $demo["string"]);
+	$section->addText("demo[string]: ". $demo[string]);
+
+	//////////////////////////////
+		
 	$section->addTextBreak(2);
 
 	$text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
@@ -119,11 +168,16 @@ function createDocument($val, $lname, $fname) {
 		}
 	}
 
+	$filename = "PEW-Session.docx";
+
+	header( "Content-Type:   application/ms-word" );// evtl noch bessere / richtigere header für word suchen
+	header( 'Content-Disposition: attachment; filename='.$filename );
+
+
 
 	// Save File
 	$objWriter = PHPWord_IOFactory::createWriter($PHPWord, 'Word2007');
-	$objWriter->save('Beispiel.docx');
-
+	$objWriter->save("php://output"); // damit wird es nicht gespeichert
 
 }
 

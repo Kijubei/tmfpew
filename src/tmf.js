@@ -49,17 +49,8 @@ $(document).ready(function () {
 
 	// Export von Word Datei von Allen Textfeldern
 	$('#word-export').click(function() {
-		$.ajax({
-		   url: 'export.php',
-		   type: "post",
-		   data: saveSession,
-		   success: function (file) {//response is value returned from php (for your example it's "bye bye"
-				//alert(file);
-				$("#word-export").attr("href", "data:text/plain, test123"); // ändert die href des save buttons in den tatsächlichen inhalt den wir laden wollen (funzt echt)
-				
-		   }
-		});
-		$("#word-export").attr("download", "Beispiel.docx"); // legt fest wie die datei heißen soll
+		$("#inputSession").attr("value", JSON.stringify(saveSession)); // packen die session als string als value vom input feld
+		$("#export-form").submit(); // und submitten das ganze - easy 
 	});
 
 	//// FUNKTIONEN
@@ -85,7 +76,7 @@ $(document).ready(function () {
 	function buildMenu(url) {
 
 		//Übersichtsliste in seite laden (erst danach alles ausführen)
-		$("#hidden-source").load(url+ " #mw-content-text", function() {
+		$("#wikisource").load(url+ " #mw-content-text", function() {
 			// das menu wird gebaut
 			// Hänge für jedes Item ausser dem ersten ein li an die navi liste
 			var count = 0;
@@ -126,7 +117,7 @@ $(document).ready(function () {
 				saveSession["url"] = url;
 
 				$(".navigation-list-item").each(function(index, value) {
-					saveSession[$(value).attr("id")] = [false, ""]; // erstelle object mit allen ID's das jeweils speichern kann ob fav / text
+					saveSession[$(value).attr("id")] = [false, "", $(value).children("a").text()]; // erstelle object mit allen ID's das jeweils speichern kann ob fav / text
 				});
 			} else { //sonst: alle favoriten einfügen (gehört eigentlich zu restoreSession)
 				Object.keys(saveSession).forEach(function(key,index) {
@@ -138,7 +129,7 @@ $(document).ready(function () {
 			//textfeld leeren weil es bei F5 sonst noch gefüllt ist
 			$("#textfeld textarea").val("");
 			
-			//Sachen von der jeweiligen Wiki Seite in  div laden
+			//Sachen von der jeweiligen Wiki Seite in den wikicontainer laden
 			$(".navigation-link").click(function() {
 				var itemUrl = $(this).attr("href"); // hole url von dem geklickten Item
 				
