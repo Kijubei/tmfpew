@@ -5,65 +5,50 @@
 
 require_once 'PHPWord.php';
 
-ini_set('default_charset', 'WINDOWS-1252');
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// nimmt die übermittelte Session variable und überführt sie von JSON in ein PHP Objekt
+$session = json_decode($_POST["inputSession"], true);
 
-//$savedSession=(isset($_POST['savedSession']) ? $_POST['savedSession']: "";
-
-//var_dump($savedSession);
+createDocument($session);
 
 
-$val = 1;
-
-$lname = "test";
-;
-
-$fname = "jojo";
-
-createDocument($val, $lname, $fname);
-
-
-function createDocument($val, $lname, $fname) {
-
-	////////////////////////////
-
-	$test = $_POST["inputSession"];
-
-	//echo "neu ist: " . $test;
-
-	$demo = array(
-	    "bool" => false,
-	    "int" => 1,
-	    "float" => 3.14,
-	    "string" => "hello world",
-	    "array" => array(),
-	    "object" => new stdClass(),
-	    "resource" => tmpfile(),
-	    "null" => null,
-	);
-
-	//$exportTest = $_POST[""]
-
-	$theSession = var_export($_POST, true);
-
-	// var_export -- nice, one-liner
-	$debug_export = var_export($demo, true);
-
-	$printr = print_r($demo, true);
-
-	/////////////////////////////////////////////////
-
-
+function createDocument($session) {
 
 	// New Word Document
 	$PHPWord = new PHPWord();
 
-	$PHPWord->getCompatibility()->setOoxmlVersion(14);
+	//$PHPWord->getCompatibility()->setOoxmlVersion(14); // braucht neuere Version
 
 	// New portrait section
 	$section = $PHPWord->createSection();
+
+	// Add title styles
+	$PHPWord->addTitleStyle(1, array('size'=>20, 'color'=>'333333', 'bold'=>true));
+	$PHPWord->addTitleStyle(2, array('size'=>16, 'color'=>'666666'));
+
+	// geht die Session durch und schreibt alles in ein Word dokument außer der url
+	foreach ($session as $key => $value) {
+		if ($key == "url") {
+			continue;
+		} else {
+			$section->addTitle("$value[2]", 2);
+
+			$section->addText("$value[1]");
+		}
+	}
+
+	$headerX = $session["list-item1"][2];
+	$textX = $session["list-item1"][1];
+
+	/*
+	// Debug
+	$session = var_export($session, true);
+
+
+	$section->addText("theSession: $session");
+	*/
+	
+	/*
+	/////// ALTES ZEUG ZUR REFERENZ
 
 	// Add header
 	$header = $section->createHeader();
@@ -79,27 +64,6 @@ function createDocument($val, $lname, $fname) {
 	$footer->addPreserveText('Seite {PAGE} von {NUMPAGES}', null, 'pStyle');
 
 	$section->addTextBreak(2);
-
-	$section->addText("Antwort: $val");
-	$section->addText("Nachname: $lname");
-	$section->addText("Vorname: $fname");
-
-	///////////////////// DEBUG
-	//$section->addText("printr: " . $printr);
-	$section->addText("printr-echo: $printr");
-
-	//$section->addText("debug_export: ".$debug_export);
-	$section->addText("debug_export: $debug_export");
-
-	$section->addText("theSession: $theSession");
-	$section->addText("test: $test");
-
-	$section->addText("demo[string]: $demo[string]");
-	//$section->addText("demo[string]: $demo["string"]");
-	$section->addText("demo[string]: ". $demo["string"]);
-	$section->addText("demo[string]: ". $demo[string]);
-
-	//////////////////////////////
 		
 	$section->addTextBreak(2);
 
@@ -107,10 +71,6 @@ function createDocument($val, $lname, $fname) {
 
 	// Define the TOC font style
 	$fontStyle = array('spaceAfter'=>60, 'size'=>12);
-
-	// Add title styles
-	$PHPWord->addTitleStyle(1, array('size'=>20, 'color'=>'333333', 'bold'=>true));
-	$PHPWord->addTitleStyle(2, array('size'=>16, 'color'=>'666666'));
 
 	// Add text elements
 	$section->addText('Table of contents:');
@@ -167,11 +127,11 @@ function createDocument($val, $lname, $fname) {
 			$table->addCell(1000)->addText("Row $r, Cell $c");
 		}
 	}
-
-	$filename = "PEW-Session.docx";
+	*/
+	
 
 	header( "Content-Type:   application/ms-word" );// evtl noch bessere / richtigere header für word suchen
-	header( 'Content-Disposition: attachment; filename='.$filename );
+	header( 'Content-Disposition: attachment; filename=PEW-Session.docx');
 
 
 
