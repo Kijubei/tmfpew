@@ -18,9 +18,8 @@
 		</div>
 	 	
 	 	<script type="text/javascript">
-		// evtl unsicher, dies ist evtl nur eine vorläufige version
 		// hier wird die hochgeladene datei von php nach js gereicht. sonderzeichen werden so gut es geht abgefangen.
-		// Der Rest sollte dann in js abgefangen werden. Es wird getestet ob das reicht.
+		// Der Rest sollte dann in js abgefangen werden.
 	 	var loadedSession = <?php if (!empty($_FILES)) {
 	 		echo json_encode(file_get_contents($_FILES["session"]['tmp_name']), JSON_HEX_QUOT|JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS);
 	 	} else {
@@ -29,25 +28,27 @@
 	 	?>;
 		</script>
 		
+		<!-- Hier wird die Navi per tmf.js reingeladen -->
+		<ul class="navigation-list clearfix"></ul>
 
 		<div id="tmfcontent" class="clearfix">
 			<div id="wikicontainer">
 			</div>
-			<div id="textfeld">
-				<textarea></textarea>
-			</div>
-			
 		</div>
 	</div>
-	<!-- Hier wird die Navi per tmf.js reingeladen -->	
-	<ul class="navigation-list clearfix"></ul>
 	
 
 	<!-- Hier wird die Übersichtsseite reingeladen um daraus die Navi zu bauen -->
 	<div id=wikisource class="hidden-source"></div>
 
-	<div id="actionbar">
+	
 		
+	
+
+	<div id="actionbar">
+		<div id="textfeld">
+		<textarea></textarea>
+		</div>
 		<ul class="actionbar-list">
 			<li class="actionbar-list-item ">
 				<a href="#"  id="save" class="floatingbutton">save</a>

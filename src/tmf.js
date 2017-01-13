@@ -28,6 +28,7 @@ $(document).ready(function () {
 
 	// favorite-button
 	$("#favorite").click(function() {
+
 		favorItem(currentItemId);
 		return false; //damit keine normale link funktionalität unternommen wird
 	});
@@ -141,9 +142,9 @@ $(document).ready(function () {
 				return false; //damit keine normale link funktionalität unternommen wird
 			});
 
-			// erstes Item Laden
+			// erstes Item Laden und currentItemId setzten
 			$("#wikicontainer").load($(".navigation-link").attr("href") + " #content");
-
+			currentItemId = $(".navigation-list-item").attr("id");
 		});
 
 	}
