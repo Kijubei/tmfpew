@@ -1,8 +1,10 @@
 body {
 	font-family: sans-serif;
 
-	background-color: #CEDADE;
+	background-color: #C5D6EB;
 }
+
+/*********** Hauptcontent CSS *********/
 
 #main {
 	width: 900px;
@@ -36,16 +38,7 @@ body {
 	text-indent: 20px;
 }
 
-#textfeld {
-	width: 450px;
-	margin: 0 auto;
-}
-
-#textfeld textarea{
-	height: 150px;
-	width: 450px;
-	padding: 15px 15px 15px 15px;
-}
+/************** Navigation CSS **************/
 
 .navigation-list {
 	position: fixed;
@@ -102,19 +95,35 @@ body {
 }
 
 .hidden-source{
-		display: none;
+	display: none;
 }
 
+/********** actionbar CSS ************/
+
 #actionbar {
-	width: 300px;
-	margin: 0 auto;
+	width: 100%;
+	position: fixed;
+	bottom: 0px;
+	left: 50%;
+	margin-left: -50%;
+	background: #C5D6EB;
+	height: 210px;
+	border: 1px solid black;
+	text-align: center;
+}
+
+#textfeld textarea{
+	height: 145px;
+	width: 600px;
+	padding: 5px 5px 5px 5px;
+	margin: 5px 0 0 0;
 }
 
 
 .actionbar-list {
-	position: fixed;
-	bottom: 0px;
 	list-style: none;
+	margin: 10px auto 5px auto;
+	display: inline-block;
 }
 
 
@@ -172,6 +181,12 @@ body {
     height: 0;
     clear: both;
     visibility: hidden;
+}
+
+/************** Wiki content CSS ****************/
+
+#firstHeading {
+	text-align: center;
 }
 
 .clearfix {display: inline-block;}

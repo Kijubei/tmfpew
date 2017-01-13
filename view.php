@@ -47,7 +47,7 @@
 
 	<div id="actionbar">
 		<div id="textfeld">
-		<textarea></textarea>
+			<textarea ></textarea>
 		</div>
 		<ul class="actionbar-list">
 			<li class="actionbar-list-item ">
