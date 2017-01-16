@@ -9,29 +9,19 @@
 </head>
 <body>
 
-	<div id="main" >
-		
 	
-		<div>.
-			<img id="tmf-logo" src="src/tmf-logo_klein.png">
-			<h1 id="headline">Patienteneinwilligungswiki</h1>
+
+	<div id="main" >
+		<div id="headline">.
+			<img id="tmf-logo" src="src/pics/tmf-logo_klein.png">
+			<h1 id="caption">Patienteneinwilligungswiki</h1>
+			<img id="logo-dummy" src="src/pics/tmf-logo_klein.png">
 		</div>
-	 	
-	 	<script type="text/javascript">
-		// hier wird die hochgeladene datei von php nach js gereicht. sonderzeichen werden so gut es geht abgefangen.
-		// Der Rest sollte dann in js abgefangen werden.
-	 	var loadedSession = <?php if (!empty($_FILES)) {
-	 		echo json_encode(file_get_contents($_FILES["session"]['tmp_name']), JSON_HEX_QUOT|JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS);
-	 	} else {
-	 		echo "";
-	 	}
-	 	?>;
-		</script>
-		
-		<!-- Hier wird die Navi per tmf.js reingeladen -->
-		<ul class="navigation-list clearfix"></ul>
+
 
 		<div id="tmfcontent" class="clearfix">
+		<!-- Hier wird die Navi per tmf.js reingeladen -->
+			<ul class="navigation-list clearfix"></ul>		
 			<div id="wikicontainer">
 			</div>
 		</div>
@@ -51,23 +41,42 @@
 		</div>
 		<ul class="actionbar-list">
 			<li class="actionbar-list-item ">
-				<a href="#"  id="save" class="floatingbutton">save</a>
+				<a href="#"  id="save" class="floatingbutton">
+					<img class="icon" src="src/pics/save.png">
+				</a>
 			</li>
 			<li class="actionbar-list-item " >
 				<form action="export.php" method="post" id="export-form" enctype="multipart/form-data">
-					<a id="word-export" href="#" class="floatingbutton">export</a>
+					<a id="word-export" href="#" class="floatingbutton">
+						<img class="icon" src="src/pics/export.png">
+					</a>
 					<input id="inputSession" class="hidden-source" type="text" name="inputSession" value="">
 			</li>
 			<li class="actionbar-list-item " >
 			
-				<a href="#"  id="favorite" class="floatingbutton">fav</a>
+				<a href="#"  id="favorite" class="floatingbutton">
+					<img class="icon" src="src/pics/bookmark.png">
+				</a>
 			</li>
 			<li class="actionbar-list-item " >
 			
-				<a href="#"  id="close-session" class="floatingbutton">close</a>
+				<a href="#"  id="close-session" class="floatingbutton">
+					<img class="icon" src="src/pics/close.png">
+				</a>
 			</li>
 		</ul>
 	</div>
+
+ 	<script type="text/javascript">
+	// hier wird die hochgeladene datei von php nach js gereicht. sonderzeichen werden so gut es geht abgefangen.
+	// Der Rest sollte dann in js abgefangen werden.
+ 	var loadedSession = <?php if (!empty($_FILES)) {
+ 		echo json_encode(file_get_contents($_FILES["session"]['tmp_name']), JSON_HEX_QUOT|JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS);
+ 	} else {
+ 		echo "";
+ 	}
+ 	?>;
+	</script>
 
 </body>
 </html>
