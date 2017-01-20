@@ -9,7 +9,7 @@ $(document).ready(function () {
 	// bekommt die Url aus dem Storage von dem new button (siehe unten). Wichtig wenn es unterschiedliche Übersichtsseiten gibt.
 	var wikiUrl = sessionStorage.wikiUrl;
 	// für development:
-	//wikiUrl = "http://localhost/tmfpew/wikiseiten/%C3%9Cbersicht%20%E2%80%93%20pew%20TMF.htm";
+	wikiUrl = "http://localhost/tmfpew/wikiseiten/%C3%9Cbersicht%20%E2%80%93%20pew%20TMF.htm";
 	
 	// Speichert die aktuelle itemID
 	var currentItemId;
@@ -52,6 +52,10 @@ $(document).ready(function () {
 	$('#word-export').click(function() {
 		$("#inputSession").attr("value", JSON.stringify(saveSession)); // packen die session als string als value vom input feld
 		$("#export-form").submit(); // und submitten das ganze - easy 
+	});
+
+	$('#close').click(function() {
+		window.location.href = "index.html";
 	});
 
 	//// FUNKTIONEN

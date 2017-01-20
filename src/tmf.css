@@ -4,37 +4,44 @@ body {
 	background-color: #C5D6EB;
 }
 
+/********** Überschrift ********/
+
+#headline {
+	padding-bottom: 10px;
+	width: 900px;
+	margin-left: 20.5%;
+}
+
+#tmf-logo {
+	float: left;
+	margin: 15px 70px 15px 15px;
+}
+
+.caption {
+	text-align: center;
+	margin: 0 0 15px 0;
+	/*background-color: green;*/
+}
+
+.pew {
+	text-shadow: 2px 2px #777777;
+	font-size: 50px;
+	margin-bottom: 5px;
+}
+
 /*********** Hauptcontent CSS *********/
 
 
 
 #main {
 	width: 900px;
-	margin: 0 auto;
-}
-
-#headline {
-	display:flex;
-	/*background-color: red;*/
-}
-
-#tmf-logo {
-	
-}
-
-#logo-dummy {
-	visibility: hidden;
-}
-
-#caption {
-	text-shadow: 2px 2px #777777;
-	text-align: center;
-	flex: 1;
-	/*background-color: green;*/
+	/*margin: 0 auto;*/
+	margin-left: 20.5%;
 }
 
 #tmfcontent {
 	/*display: flex;*/
+	padding-bottom: 210px;
 }
 
 #wikicontainer {
@@ -87,6 +94,8 @@ body {
 	display:block; /*damit width/height funktionieren;*/
 	width: 158px;
 	height: 28px;
+	list-style-type: none;
+	text-decoration: none;
 
 	/* aussehen; */
 	background-color: #FFF;
@@ -119,13 +128,17 @@ body {
 	left: 0px;
 	background: #C5D6EB;
 	height: 210px;
-	border: 1px solid black;
+	/*border: 1px solid black;*/
 	text-align: center;
+}
+
+#textfeld {
+	margin: 0px 0px 0px 7px;
 }
 
 #textfeld textarea{
 	height: 145px;
-	width: 600px;
+	width: 667px;
 	padding: 5px 5px 5px 5px;
 	margin: 5px 0 0 0;
 }
@@ -145,7 +158,6 @@ body {
 
 
 .actionbar-list-item a{
-	text-decoration: none;
 	margin-left: 5px;
 	width: 28px;
 	float: left;
@@ -163,6 +175,11 @@ body {
 
 /************* INDEX **********/
 
+#start {
+	width: 900px;
+	margin: 0 auto;
+}
+
 #dragdrop {
 	margin: 15px auto;
 	border: 3px solid grey;
@@ -176,20 +193,13 @@ body {
 	font-size: 0.9vw;
 }
 
-#neu {
-	position: relative;
-	width: 0px;
-	margin-left: auto;
-	margin-right: auto;
-	list-style: none;
+.index-buttons {
+	display: inline-block;
+	padding: 0px;
 }
 
-#neu a{
-	text-decoration: none;
-	margin-left: 5px;
-	width: 150px;
-	float: left;
-	color: black;
+#neu {
+	list-style: none;
 }
 
 
@@ -209,6 +219,10 @@ display:none;
 
 .toc {
 display:none;
+}
+
+.printfooter{
+	display:none;
 }
 
 .clearfix:after {

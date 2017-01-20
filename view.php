@@ -9,14 +9,17 @@
 </head>
 <body>
 
-	
+	<div id="headline">
+		<img id="tmf-logo" src="src/pics/tmf-logo_klein.png">
+		<div class="caption">
+			<h1 class="pew">PEW²</h1>
+			<p>Patienteninformation und Einwilligung: Wiki & Wizzard</p>	
+		</div>
+
+	</div>
 
 	<div id="main" >
-		<div id="headline">.
-			<img id="tmf-logo" src="src/pics/tmf-logo_klein.png">
-			<h1 id="caption">Patienteneinwilligungswiki</h1>
-			<img id="logo-dummy" src="src/pics/tmf-logo_klein.png">
-		</div>
+		
 
 
 		<div id="tmfcontent" class="clearfix">
@@ -60,7 +63,7 @@
 			</li>
 			<li class="actionbar-list-item " >
 			
-				<a href="#"  id="close-session" class="floatingbutton">
+				<a href="#"  id="close" class="floatingbutton">
 					<img class="icon" src="src/pics/close.png">
 				</a>
 			</li>
