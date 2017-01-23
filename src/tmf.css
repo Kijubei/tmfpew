@@ -8,19 +8,26 @@ body {
 
 #headline {
 	padding-bottom: 10px;
-	width: 900px;
-	margin-left: 20.5%;
+	width: 1200px;
+	/*margin-left: 20.5%;*/
+	display: flex;
+	margin:0 auto 15px auto;
 }
 
 #tmf-logo {
-	float: left;
-	margin: 15px 70px 15px 15px;
+	margin: auto 0 auto 0;
+}
+
+.dummy-logo {
+	margin: auto 0 auto 0;
+	visibility: hidden;
 }
 
 .caption {
 	text-align: center;
-	margin: 0 0 15px 0;
-	/*background-color: green;*/
+	/*margin: 0 0 15px 0;
+	background-color: green;*/
+	flex: 1;
 }
 
 .pew {
@@ -34,14 +41,11 @@ body {
 
 
 #main {
-	width: 900px;
-	/*margin: 0 auto;*/
-	margin-left: 20.5%;
-}
-
-#tmfcontent {
-	/*display: flex;*/
+	width: 1200px;
+	margin: 0 auto;
+	/*margin-left: 20.5%;*/
 	padding-bottom: 210px;
+	display:flex;
 }
 
 #wikicontainer {
@@ -50,11 +54,17 @@ body {
 	box-shadow: 4px 4px 4px #333;
 	border: 2px solid grey;
 	margin-left: 220px;
+	flex: 1;
 }
 
 #wikicontainer p {
 	line-height: 1.5em;
 	text-indent: 20px;
+}
+
+.dummy-nav {
+	width: 220px;
+	visibility: hidden;
 }
 
 /************** Navigation CSS **************/
@@ -132,13 +142,10 @@ body {
 	text-align: center;
 }
 
-#textfeld {
-	margin: 0px 0px 0px 7px;
-}
 
 #textfeld textarea{
 	height: 145px;
-	width: 667px;
+	width: 760px;
 	padding: 5px 5px 5px 5px;
 	margin: 5px 0 0 0;
 }
@@ -178,6 +185,7 @@ body {
 #start {
 	width: 900px;
 	margin: 0 auto;
+	text-align: center;
 }
 
 #dragdrop {
@@ -185,10 +193,10 @@ body {
 	border: 3px solid grey;
 	border-radius: 20px;
 	padding: 200px;
+	background-color: white;
 }
 
 #dragdrop p{
-	text-align: center;
 	color: grey;
 	font-size: 0.9vw;
 }
@@ -202,6 +210,9 @@ body {
 	list-style: none;
 }
 
+#neu a {
+	color:black;
+}
 
 /************** Wiki content CSS ****************/
 

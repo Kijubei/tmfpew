@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+<!DOCTYPE PHP>
 <html lang="de">
 <head>
 	<meta charset="utf-8"/>
@@ -10,24 +10,24 @@
 <body>
 
 	<div id="headline">
-		<img id="tmf-logo" src="src/pics/tmf-logo_klein.png">
+		<div id="tmf-logo">
+			<img  src="src/pics/tmf-logo_klein.png">
+		</div>
 		<div class="caption">
 			<h1 class="pew">PEW²</h1>
 			<p>Patienteninformation und Einwilligung: Wiki & Wizzard</p>	
 		</div>
-
+		<div class="dummy-logo">
+			<img  src="src/pics/tmf-logo_klein.png">
+		</div>
 	</div>
 
 	<div id="main" >
-		
-
-
-		<div id="tmfcontent" class="clearfix">
 		<!-- Hier wird die Navi per tmf.js reingeladen -->
-			<ul class="navigation-list clearfix"></ul>		
-			<div id="wikicontainer">
-			</div>
-		</div>
+		<ul class="navigation-list"></ul>		
+		<div id="wikicontainer"></div>
+		<div class="dummy-nav"></div>
+
 	</div>
 	
 
