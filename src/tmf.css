@@ -221,18 +221,22 @@ body {
 }
 
 #jump-to-nav {
-display:none;
+	display:none;
 }
 
 .mw-editsection {
-display:none;
+	display:none;
 }
 
 .toc {
-display:none;
+	display:none;
 }
 
 .printfooter{
+	display:none;
+}
+
+#sitesub{
 	display:none;
 }
 
