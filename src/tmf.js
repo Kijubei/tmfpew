@@ -54,6 +54,7 @@ $(document).ready(function () {
 		$("#export-form").submit(); // und submitten das ganze - easy 
 	});
 
+	// Beendet Session und geht zur index zurück
 	$('#close').click(function() {
 		window.location.href = "index.html";
 	});

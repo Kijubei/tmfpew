@@ -75,7 +75,7 @@ body {
 	width: 200px;
 	/*top: 50%;
 	transform: translateY(-50%); hat das menu dynamisch positioniert */
-	max-height: 75%;
+	max-height: 60.5%;
 	overflow: auto;
 	margin-top: 0;
 }
