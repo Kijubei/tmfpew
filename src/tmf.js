@@ -125,6 +125,7 @@ $(document).ready(function () {
 				$(".navigation-list-item").each(function(index, value) {
 					saveSession[$(value).attr("id")] = [false, "", $(value).children("a").text()]; // erstelle object mit allen ID's das jeweils speichern kann ob fav / text
 				});
+
 			} else { //sonst: alle favoriten einfügen (gehört eigentlich zu restoreSession)
 				Object.keys(saveSession).forEach(function(key,index) {
 						setFavorItem(key, saveSession[key][0]);
@@ -132,8 +133,7 @@ $(document).ready(function () {
 
 			}
 
-			//textfeld leeren weil es bei F5 sonst noch gefüllt ist
-			$("#textfeld textarea").val("");
+			
 			
 			//Sachen von der jeweiligen Wiki Seite in den wikicontainer laden
 			$(".navigation-link").click(function() {
@@ -150,6 +150,8 @@ $(document).ready(function () {
 			// erstes Item Laden und currentItemId setzten
 			$("#wikicontainer").load($(".navigation-link").attr("href") + " #content");
 			currentItemId = $(".navigation-list-item").attr("id");
+			$("#textfeld textarea").val(saveSession[currentItemId][1]);
+			
 		});
 
 	}
