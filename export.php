@@ -1,11 +1,9 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
 
 <?php
-require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/vendor/phpoffice/phpword/src/PhpWord/PhpWord.php';
 
-header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document'); // header für docx
-header( 'Content-Disposition: attachment; filename=PEW-Session.docx');
+
+require_once 'PHPWord.php';
 
 // nimmt die übermittelte Session variable und überführt sie von JSON in ein PHP Objekt
 $session = json_decode($_POST["inputSession"], true);
@@ -14,10 +12,9 @@ createDocument($session);
 
 
 function createDocument($session) {
-	//mb_internal_encoding("utf-8");
 
 	// New Word Document
-	$PHPWord = new \PhpOffice\PhpWord\PhpWord();
+	$PHPWord = new PHPWord();
 
 	//$PHPWord->getCompatibility()->setOoxmlVersion(14); // braucht neuere Version
 
@@ -42,7 +39,7 @@ function createDocument($session) {
 	$headerX = $session["list-item1"][2];
 	$textX = $session["list-item1"][1];
 
-/*
+	/*
 	// Debug
 	$session = var_export($session, true);
 
@@ -133,19 +130,16 @@ function createDocument($session) {
 	*/
 	
 
-	//header( "Content-Type:   application/ms-word" );// evtl noch bessere / richtigere header für word suchen
-	//header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document'); // header für docx
-	//header( 'Content-Disposition: attachment; filename=PEW-Session.docx');
-	//$fsize = filesize($PHPWord);
- 	//header("Content-Length: ".$fsize);
+	header( "Content-Type:   application/ms-word" );// evtl noch bessere / richtigere header für word suchen
+	header( 'Content-Disposition: attachment; filename=PEW-Session.docx');
+
+
 
 	// Save File
-	$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($PHPWord, 'Word2007');
+	$objWriter = PHPWord_IOFactory::createWriter($PHPWord, 'Word2007');
 	$objWriter->save("php://output"); // damit wird es nicht gespeichert
-	//$objWriter->save('test.docx');
-
-	exit;
 
 }
+
 
 ?>
