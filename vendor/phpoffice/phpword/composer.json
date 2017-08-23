@@ -20,7 +20,7 @@
         },
         {
             "name": "Franck Lefevre",
-            "homepage": "http://blog.rootslabs.net"
+            "homepage": "https://rootslabs.net/blog/"
         },
         {
             "name": "Ivan Lanin",
@@ -36,7 +36,6 @@
         "ext-xml": "*",
         "zendframework/zend-escaper": "2.4.*",
         "zendframework/zend-stdlib": "2.4.*",
-        "zendframework/zend-validator": "2.4.*",
         "phpoffice/common": "0.2.*"
     },
     "require-dev": {

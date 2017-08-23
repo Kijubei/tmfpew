@@ -96,9 +96,56 @@
         ]
     },
     {
+        "name": "zendframework/zend-escaper",
+        "version": "2.4.13",
+        "version_normalized": "2.4.13.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/zendframework/zend-escaper.git",
+            "reference": "13f468ff824f3c83018b90aff892a1b3201383a9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/zendframework/zend-escaper/zipball/13f468ff824f3c83018b90aff892a1b3201383a9",
+            "reference": "13f468ff824f3c83018b90aff892a1b3201383a9",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.23"
+        },
+        "require-dev": {
+            "fabpot/php-cs-fixer": "1.7.*",
+            "phpunit/phpunit": "~4.0",
+            "satooshi/php-coveralls": "dev-master"
+        },
+        "time": "2015-05-07T14:55:31+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.4-dev",
+                "dev-develop": "2.5-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Zend\\Escaper\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "homepage": "https://github.com/zendframework/zend-escaper",
+        "keywords": [
+            "escaper",
+            "zf2"
+        ]
+    },
+    {
         "name": "zendframework/zend-stdlib",
-        "version": "2.4.11",
-        "version_normalized": "2.4.11.0",
+        "version": "2.4.13",
+        "version_normalized": "2.4.13.0",
         "source": {
             "type": "git",
             "url": "https://github.com/zendframework/zend-stdlib.git",
@@ -154,8 +201,8 @@
     },
     {
         "name": "zendframework/zend-validator",
-        "version": "2.4.11",
-        "version_normalized": "2.4.11.0",
+        "version": "2.4.13",
+        "version_normalized": "2.4.13.0",
         "source": {
             "type": "git",
             "url": "https://github.com/zendframework/zend-validator.git",
@@ -220,65 +267,18 @@
         ]
     },
     {
-        "name": "zendframework/zend-escaper",
-        "version": "2.4.11",
-        "version_normalized": "2.4.11.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/zendframework/zend-escaper.git",
-            "reference": "13f468ff824f3c83018b90aff892a1b3201383a9"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/zendframework/zend-escaper/zipball/13f468ff824f3c83018b90aff892a1b3201383a9",
-            "reference": "13f468ff824f3c83018b90aff892a1b3201383a9",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.23"
-        },
-        "require-dev": {
-            "fabpot/php-cs-fixer": "1.7.*",
-            "phpunit/phpunit": "~4.0",
-            "satooshi/php-coveralls": "dev-master"
-        },
-        "time": "2015-05-07T14:55:31+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.4-dev",
-                "dev-develop": "2.5-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Zend\\Escaper\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "homepage": "https://github.com/zendframework/zend-escaper",
-        "keywords": [
-            "escaper",
-            "zf2"
-        ]
-    },
-    {
         "name": "phpoffice/phpword",
-        "version": "v0.13.0",
-        "version_normalized": "0.13.0.0",
+        "version": "dev-develop",
+        "version_normalized": "dev-develop",
         "source": {
             "type": "git",
             "url": "https://github.com/PHPOffice/PHPWord.git",
-            "reference": "0a3f873972defb304de4fa2f5f53156558c11a7a"
+            "reference": "c653377b2e36a964adf69485073a55398b911151"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/PHPOffice/PHPWord/zipball/0a3f873972defb304de4fa2f5f53156558c11a7a",
-            "reference": "0a3f873972defb304de4fa2f5f53156558c11a7a",
+            "url": "https://api.github.com/repos/PHPOffice/PHPWord/zipball/c653377b2e36a964adf69485073a55398b911151",
+            "reference": "c653377b2e36a964adf69485073a55398b911151",
             "shasum": ""
         },
         "require": {
@@ -286,8 +286,7 @@
             "php": ">=5.3.3",
             "phpoffice/common": "0.2.*",
             "zendframework/zend-escaper": "2.4.*",
-            "zendframework/zend-stdlib": "2.4.*",
-            "zendframework/zend-validator": "2.4.*"
+            "zendframework/zend-stdlib": "2.4.*"
         },
         "require-dev": {
             "dompdf/dompdf": "0.6.*",
@@ -306,7 +305,7 @@
             "ext-xsl": "Allows applying XSL style sheet to headers, to main document part, and to footers of an OOXML template",
             "ext-zip": "Allows writing OOXML and ODF"
         },
-        "time": "2016-07-31T08:53:39+00:00",
+        "time": "2017-08-13T20:10:15+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -323,10 +322,6 @@
                 "name": "Mark Baker"
             },
             {
-                "name": "Franck Lefevre",
-                "homepage": "http://blog.rootslabs.net"
-            },
-            {
                 "name": "Gabriel Bull",
                 "email": "me@gabrielbull.com",
                 "homepage": "http://gabrielbull.com/"
@@ -338,6 +333,10 @@
             {
                 "name": "Roman Syroeshko",
                 "homepage": "http://ru.linkedin.com/pub/roman-syroeshko/34/a53/994/"
+            },
+            {
+                "name": "Franck Lefevre",
+                "homepage": "https://rootslabs.net/blog/"
             }
         ],
         "description": "PHPWord - A pure PHP library for reading and writing word processing documents (OOXML, ODF, RTF, HTML, PDF)",
