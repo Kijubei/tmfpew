@@ -16,7 +16,7 @@
 		</div>
 		<div class="caption">
 			<h1 class="pew">PEW²</h1>
-			<p>Patienteninformation und Einwilligung: Wiki & Wizzard</p>	
+			<p>Patienteninformation und Einwilligung: Wiki & Wizard</p>	
 		</div>
 		<div class="dummy-logo">
 			<img  src="src/pics/tmf-logo_klein.png">
