@@ -8,7 +8,7 @@ $(document).ready(function () {
 
 	// bekommt die Url aus dem Storage von dem new button (siehe unten). Wichtig wenn es unterschiedliche Übersichtsseiten gibt.
 	var wikiUrl = sessionStorage.wikiUrl;
-	// für development:
+	// für development (lokale pseudo wikiseiten):
 	//wikiUrl = "http://localhost/tmfpew/wikiseiten/%C3%9Cbersicht%20%E2%80%93%20pew%20TMF.htm";
 	
 	// Speichert die aktuelle itemID
@@ -129,11 +129,15 @@ $(document).ready(function () {
 			} else { //sonst: alle favoriten einfügen (gehört eigentlich zu restoreSession)
 				Object.keys(saveSession).forEach(function(key,index) {
 						setFavorItem(key, saveSession[key][0]);
+						markNotedItem(key);
+						if (saveSession[key][0]) {
+							currentItemId = key;
+						}  
+						console.log("currentItemId = " + currentItemId);
 				});
 
 			}
 
-			
 			
 			//Sachen von der jeweiligen Wiki Seite in den wikicontainer laden
 			$(".navigation-link").click(function() {
@@ -142,16 +146,22 @@ $(document).ready(function () {
 				saveText(); // textfeld speichern
 				
 				$("#wikicontainer").load(itemUrl + " #content"); //wiki reinladen
+				favorItem(currentItemId); // altes unfavoren
 				currentItemId = $(this).parent().attr("id"); //momentane itemID merken
+				favorItem(currentItemId); // neues favoren
 				$("#textfeld textarea").val(saveSession[currentItemId][1]); // textfeld laden
 				return false; //damit keine normale link funktionalität unternommen wird
 			});
 
 			// erstes Item Laden und currentItemId setzten
-			$("#wikicontainer").load($(".navigation-link").attr("href") + " #content");
-			currentItemId = $(".navigation-list-item").attr("id");
+			// wenn eine neue Session, definiere das erste Item als current und favor es
+			if (neu) {
+				currentItemId = $(".navigation-list-item").attr("id");
+				favorItem(currentItemId); 
+			} 
+			//$("#wikicontainer").load($(".navigation-link").attr("href") + " #content");
+			$("#wikicontainer").load($("#"+currentItemId+" .navigation-link").attr("href") + " #content");
 			$("#textfeld textarea").val(saveSession[currentItemId][1]);
-			
 		});
 
 	}
@@ -185,7 +195,35 @@ $(document).ready(function () {
 		if (currentItemId != null) {
 			//aktuelles textfeld speichern
 			saveSession[currentItemId][1] = $("#textfeld textarea").val();
+			//item makieren, dass etwas notiert wurde
+			markNotedItem(currentItemId);
 		} 
+		//console.log(saveSession);
+	}
+
+	// funktion um ein item zu markieren, wenn es text enthält
+	// auskommentiert, weil noch nicht fertig
+	function markNotedItem(itemId) {
+		// wenn das textfeld nicht leer ist
+		/*if (saveSession[itemId][1] != "" && $("#"+itemId img).length){
+			//$("#"+itemId).css("border", "2px solid green"); // erstmal grünen rand
+			$("#"+itemId).append(
+				$("<img>").attr("src","src/pics/pen.png").addClass("icon")
+			);
+		} else {
+			//$("#"+itemId).css("border", "none"); // rand auf none
+		}*/
+		// Wenn text da ist, aber kein Bild
+	/*	if (saveSession[itemId][1] != "" && ($("#"+itemId+" img").length==false)) {
+			$("#"+itemId).append(
+				$("<img>").attr("src","src/pics/pen.png").addClass("icon")
+			);
+		}
+		// Wenn text nicht da und Bild schon
+		if (saveSession[itemId][1] == "" && ($("#"+itemId+" img").length)) {
+			$("#"+itemId+" img").remove();
+		}
+	*/
 	}
 
 	// Mit der funktion wird eine Session wiederhergestellt. Dies geschieht durch das füllen der saveSession Variable.
@@ -206,7 +244,7 @@ $(document).ready(function () {
 		    		favorItem(key);
 		    	}*/ 
 		    }
-		    console.log("saveSession[0]: " + saveSession[key][0] + " | saveSession[1]: " + saveSession[key][1] + " | loadedSession[key]: " + loadedSession[key]);
+		    //console.log("saveSession[0]: " + saveSession[key][0] + " | saveSession[1]: " + saveSession[key][1] + " | loadedSession[key]: " + loadedSession[key]);
 
 		});
 

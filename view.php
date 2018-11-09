@@ -56,12 +56,12 @@
 					</a>
 					<input id="inputSession" class="hidden-source" type="text" name="inputSession" value="">
 			</li>
-			<li class="actionbar-list-item " >
+			<!--<li class="actionbar-list-item " >
 			
 				<a href="#"  id="favorite" class="floatingbutton" title="Aktuelle Seite favorisieren">
 					<img class="icon" src="src/pics/bookmark.png">
 				</a>
-			</li>
+			</li>-->
 			<li class="actionbar-list-item " >
 			
 				<a href="#"  id="close" class="floatingbutton" title="Session schließen">
