@@ -58,3 +58,5 @@ pew.sublime-workspace
 pewpew.sublime-project
 tmfpew.zip
 src/css save
+.vscode/settings.json
+src/dropzone.js
