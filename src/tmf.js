@@ -9,7 +9,7 @@ $(document).ready(function () {
 	// bekommt die Url aus dem Storage von dem new button (siehe unten). Wichtig wenn es unterschiedliche Übersichtsseiten gibt.
 	var wikiUrl = sessionStorage.wikiUrl;
 	// für development (lokale pseudo wikiseiten):
-	//wikiUrl = "http://localhost/tmfpew/wikiseiten/%C3%9Cbersicht%20%E2%80%93%20pew%20TMF.htm";
+	wikiUrl = "http://localhost/tmfpew/wikiseiten/%C3%9Cbersicht%20%E2%80%93%20pew%20TMF.htm";
 
 	// Speichert die aktuelle itemID
 	var currentItemId;
@@ -24,14 +24,49 @@ $(document).ready(function () {
 
 	buildMenu(wikiUrl);
 
+	// testtour
+	var tour = new Tour({
+		name: 'wizzardtour2',
+		steps: [
+		{
+		  	element: "#navigation-list",
+		  	title: "Navigation",
+		  	content: "Dies ist Ihre Navigation, hier können Sie relevante Themen aussuchen.",
+		  	backdrop: true
+		},
+		{
+		  	element: "#wikicontainer",
+		  	title: "Informationsseite",
+		  	content: "Hier können Sie alles relevante zum Thema lesen.",
+		  	placement: "top",
+		  	backdrop: true
+		},
+		{
+			element: "#textfeld textarea",
+			title: "Notizblock",
+			content: "Diesen Bereich können Sie als Notzblock benutzten. Er wird für jedes Thema separat gespeichert und angezeigt.",
+			backdrop: true
+		},
+		{
+			// hier werden leider alle anvisiert, außerdem sind die am anfang gar nicht da !
+			element: ".quicknote",
+			title: "Schnellnotiz",
+			content: "Wenn Sie diesen Abschnitt notieren wollen, können Sie ihn mit diesem Knopf direkt in ihren Notizblock übernehmen.",
+			backdrop: true
+		}
+		// todo: die knöpfe erklären
+	]});
+
+	
+
 	////// BUTTONS
 
-	// favorite-button
-	// ENTFERNT, funktionalität reworked um das currentItem anzuzeigen
-	$("#favorite").click(function () {
-
-		favorItem(currentItemId);
-		return false; //damit keine normale link funktionalität unternommen wird
+	// Tour-button, um die tour zu starten
+	$("#tour a").click(function () {
+		//alert("erreicht");
+		tour.init();
+		tour.restart();
+		//return false; //damit keine normale link funktionalität unternommen wird
 	});
 
 	// save-button: erzeugt eine JSON Datei mit texten im textfeld und welche items faviorisiert wurden
@@ -95,7 +130,7 @@ $(document).ready(function () {
 				if (this.tagName == "H3") {
 
 					// ein neues ul an die navi hängen, das die klasse sublist hat und den inhalt (in einem div) von der quelle nimmt (nur mw-headline)
-					$(".navigation-list").append( //hänge an die navi an ...
+					$("#navigation-list").append( //hänge an die navi an ...
 						$("<ul></ul>").addClass('navigation-sublist').append( // eine ul mit der klasse sublist
 							$("<div></div>").addClass("floatingbutton").append( // hänge daran ein div der klasse floatingbutton
 								$(".mw-headline", $(this)).html()) // mit dem inhalt aus der quelle mw-headline
@@ -121,18 +156,22 @@ $(document).ready(function () {
 				$(this).children(".navigation-list-item").slideToggle("slow");
 			});
 
-			// baue die Variable um die Session zu speichern (nur wenn neu)
+			// Falls es sich um eine neue Sitzung handelt
 			if (neu) {
 				// Speichern welches Menu genutzt wird
 				saveSession["url"] = url;
 
+				// baue die Variable um die Session zu speichern (nur wenn neu)
 				$(".navigation-list-item").each(function (index, value) {
-					saveSession[$(value).attr("id")] = [false, "", $(value).children("a").text()]; // erstelle object mit allen ID's das jeweils speichern kann ob fav / text
+					saveSession[$(value).attr("id")] = [false, "", $(value).children("a").text()]; // erstelle object mit allen ID's das jeweils speichern kann ob current / text
 				});
+
+				// lege das erste item als current fest
+				currentItemId = $(".navigation-list-item").attr("id");
 
 			} else { //sonst: alle favoriten einfügen (gehört eigentlich zu restoreSession)
 				Object.keys(saveSession).forEach(function (key, index) {
-					setFavorItem(key, saveSession[key][0]);
+					setMarkCurrentItem(key, saveSession[key][0]);
 					markNotedItem(key);
 					if (saveSession[key][0]) {
 						currentItemId = key;
@@ -144,34 +183,42 @@ $(document).ready(function () {
 
 
 			//Sachen von der jeweiligen Wiki Seite in den wikicontainer laden
-			$(".navigation-link").click(function () {
+			/*$(".navigation-link").click(function () {
 				var itemUrl = $(this).attr("href"); // hole url von dem geklickten Item
 
 				saveText(); // textfeld speichern
 
  				//wiki reinladen und buttons innerhalb des wikis erstellen
 				$("#wikicontainer").load(itemUrl + " #content", function () {
-					generateWikiButtons();
+					generateQuickNoteButtons();
 				});
 
-				favorItem(currentItemId); // altes unfavoren
+				setMarkCurrentItem(currentItemId,false); // altes unfavoren
 				currentItemId = $(this).parent().attr("id"); //momentane itemID merken
-				favorItem(currentItemId); // neues favoren
+				markCurrentItem(currentItemId); // neues favoren
 				$("#textfeld textarea").val(saveSession[currentItemId][1]); // textfeld laden
+				return false; //damit keine normale link funktionalität unternommen wird
+			});*/
+			$(".navigation-link").click(function() {
+				loadItem(this);
 				return false; //damit keine normale link funktionalität unternommen wird
 			});
 
 
 
 			// wenn eine neue Session, definiere das erste Item als current und favor es
-			if (neu) {
+			/*	if (neu) {
 				currentItemId = $(".navigation-list-item").attr("id");
-				favorItem(currentItemId);
-			}
+				markCurrentItem(currentItemId);
+			}*/
+
 			// erstes Item Laden 
-			$("#wikicontainer").load($("#" + currentItemId + " .navigation-link").attr("href") + " #content");
+			loadItem("#"+currentItemId +" .navigation-link");
+			//$("#wikicontainer").load($("#" + currentItemId + " .navigation-link").attr("href") + " #content");
+			// Schnellnotizknöpfe erstellen
+			//generateQuickNoteButtons();
 			// textfeld füllen
-			$("#textfeld textarea").val(saveSession[currentItemId][1]);
+			//$("#textfeld textarea").val(saveSession[currentItemId][1]);
 
 
 		});
@@ -179,7 +226,7 @@ $(document).ready(function () {
 	}
 
 	// funktion bekommt eine item ID, sucht danach und gibt deren kind (also den link, bzw den button) einen orangen rand / oder macht ihn weg
-	function favorItem(itemId) {
+	function markCurrentItem(itemId) {
 		if (saveSession[itemId][0] == false) { // nicht fav
 			$("#" + itemId).children().css("border-color", "orange"); // mach rand orange
 			saveSession[itemId][0] = true;
@@ -191,7 +238,7 @@ $(document).ready(function () {
 	}
 
 	// funktion bekommt eine item ID und ein bool und setzt es dann je nach bool auf fav (true) oder nicht fav (false)
-	function setFavorItem(itemId, bool) {
+	function setMarkCurrentItem(itemId, bool) {
 		if (bool) { // fav
 			$("#" + itemId).children().css("border-color", "orange"); // mach rand orange
 			saveSession[itemId][0] = true;
@@ -226,8 +273,24 @@ $(document).ready(function () {
 		}
 	}
 
+	function loadItem (navLink) {
+		var itemUrl = $(navLink).attr("href"); // hole url von dem geklickten Item
+
+		saveText(); // textfeld speichern
+
+		 //wiki reinladen und buttons innerhalb des wikis erstellen
+		$("#wikicontainer").load(itemUrl + " #content", function () {
+			generateQuickNoteButtons();
+		});
+
+		setMarkCurrentItem(currentItemId,false); // altes unfavoren
+		currentItemId = $(navLink).parent().attr("id"); //momentane itemID merken
+		markCurrentItem(currentItemId); // neues favoren
+		$("#textfeld textarea").val(saveSession[currentItemId][1]); // textfeld laden
+	}
+
 	// Eine Funktion mit der die "runterkopier" knöpfe in dem jeweiligen wiki dokument erstellt werden.
-	function generateWikiButtons() {
+	function generateQuickNoteButtons() {
 		$(".mw-content-ltr p b").append(
 			$('<a>', { class: "quicknote", href: "#", title: "Abschnitt runter Kopieren" }).append(
 				$('<img>', { src: "src/pics/takenote-small.png" })
@@ -272,7 +335,7 @@ $(document).ready(function () {
 			} else {
 				saveSession[key] = loadedSession[key];
 		    	/*if (loadedSession[key][0] == true ) { // passiert jetzt an anderer stelle (weil zu dem Zeitpunkt das menu noch nicht da ist)
-		    		favorItem(key);
+		    		markCurrentItem(key);
 		    	}*/
 			}
 			//console.log("saveSession[0]: " + saveSession[key][0] + " | saveSession[1]: " + saveSession[key][1] + " | loadedSession[key]: " + loadedSession[key]);

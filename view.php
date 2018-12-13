@@ -4,8 +4,10 @@
 	<meta charset="utf-8"/>
 	<title>Patienteneinwilligungswizard</title>
 	<link rel="stylesheet" type="text/css" href="src/tmf.css">
+	<link href="src/bootstrap-tour-standalone.min.css" rel="stylesheet">
 	<script type="text/javascript" src="src/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript" src="src/tmf.js"></script>
+	<script src="src/bootstrap-tour-standalone.min.js"></script>
 	
 </head>
 <body>
@@ -18,14 +20,19 @@
 			<h1 class="pew">PEW²</h1>
 			<p>Patienteninformation und Einwilligung: Wiki & Wizard</p>	
 		</div>
-		<div class="dummy-logo">
+		<!-- <div class="dummy-logo">
 			<img  src="src/pics/tmf-logo_klein.png">
+		</div> -->
+		<div id="tour">
+			<a href="#" class="floatingbutton" title="Hilfe! Wie geht das hier?">
+				?
+			</a>
 		</div>
 	</div>
 
 	<div id="main" >
 		<!-- Hier wird die Navi per tmf.js reingeladen -->
-		<ul class="navigation-list"></ul>		
+		<ul id="navigation-list"></ul>		
 		<div id="wikicontainer"></div>
 		<div class="dummy-nav"></div>
 
@@ -56,12 +63,12 @@
 					</a>
 					<input id="inputSession" class="hidden-source" type="text" name="inputSession" value="">
 			</li>
-			<!--<li class="actionbar-list-item " >
-			
-				<a href="#"  id="favorite" class="floatingbutton" title="Aktuelle Seite favorisieren">
+			<!-- <li class="actionbar-list-item " >
+
+				<a href="#"  id="tour" class="floatingbutton" title="Hilfe! Wie geht das hier?">
 					<img class="icon" src="src/pics/bookmark.png">
 				</a>
-			</li>-->
+			</li> -->
 			<li class="actionbar-list-item " >
 			
 				<a href="#"  id="close" class="floatingbutton" title="Session schließen">

@@ -1,7 +1,8 @@
 body {
 	font-family: sans-serif;
-
 	background-color: #C5D6EB;
+	display: flex;
+	flex-direction: column;
 }
 
 /********** Überschrift ********/
@@ -16,11 +17,25 @@ body {
 
 #tmf-logo {
 	margin: auto 0 auto 0;
+	flex:0.2;
 }
 
 .dummy-logo {
 	margin: auto 0 auto 0;
 	visibility: hidden;
+}
+
+#tour {
+	margin:auto;
+	flex: 0.2;
+}
+
+#tour a {
+	width: 13px;
+	text-shadow: rgb;
+	text-shadow: 1px 1px gray;
+	color: #C5D6EB;
+	font-size: x-large;
 }
 
 .caption {
@@ -69,7 +84,7 @@ body {
 
 /************** Navigation CSS **************/
 
-.navigation-list {
+#navigation-list {
 	position: fixed;
 	padding: 0px 20px 5px 0px; /* damit der scroll balken weiter rechts ist */
 	width: 200px;
@@ -139,10 +154,15 @@ body {
 	left: 0px;
 	background: #C5D6EB;
 	height: 210px;
+	display: flex;
+	flex-direction: column;
 	/*border: 1px solid black;*/
-	text-align: center;
+	/* text-align: center; */
 }
 
+#textfeld {
+	margin: auto;
+}
 
 #textfeld textarea{
 	height: 145px;
