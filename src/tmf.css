@@ -223,8 +223,8 @@ body {
 }
 
 .index-buttons {
-	display: inline-block;
 	padding: 0px;
+	margin: 0 auto;
 }
 
 #neu {

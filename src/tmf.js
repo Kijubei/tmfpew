@@ -24,41 +24,9 @@ $(document).ready(function () {
 
 	buildMenu(wikiUrl);
 
-	// testtour
-	var tour = new Tour({
-		name: 'wizzardtour2',
-		steps: [
-		{
-		  	element: "#navigation-list",
-		  	title: "Navigation",
-		  	content: "Dies ist Ihre Navigation, hier können Sie relevante Themen aussuchen.",
-		  	backdrop: true
-		},
-		{
-		  	element: "#wikicontainer",
-		  	title: "Informationsseite",
-		  	content: "Hier können Sie alles relevante zum Thema lesen.",
-		  	placement: "top",
-		  	backdrop: true
-		},
-		{
-			element: "#textfeld textarea",
-			title: "Notizblock",
-			content: "Diesen Bereich können Sie als Notzblock benutzten. Er wird für jedes Thema separat gespeichert und angezeigt.",
-			backdrop: true
-		},
-		{
-			// hier werden leider alle anvisiert, außerdem sind die am anfang gar nicht da !
-			element: ".quicknote",
-			title: "Schnellnotiz",
-			content: "Wenn Sie diesen Abschnitt notieren wollen, können Sie ihn mit diesem Knopf direkt in ihren Notizblock übernehmen.",
-			backdrop: true
-		}
-		// todo: die knöpfe erklären
-	]});
-
+	// tour initialisieren
+	var tour = initializeTour();
 	
-
 	////// BUTTONS
 
 	// Tour-button, um die tour zu starten
@@ -291,11 +259,14 @@ $(document).ready(function () {
 
 	// Eine Funktion mit der die "runterkopier" knöpfe in dem jeweiligen wiki dokument erstellt werden.
 	function generateQuickNoteButtons() {
+		// es wird an jeden paragraph der ein "big" element enthält (und damit hoffentlich eine überschrift ist) ein quicknote angehängt
 		$(".mw-content-ltr p b").append(
 			$('<a>', { class: "quicknote", href: "#", title: "Abschnitt runter Kopieren" }).append(
 				$('<img>', { src: "src/pics/takenote-small.png" })
 			)
 		);
+		// dem ersten wird außerdem noch eine ID gegeben für die guide tour
+		$(".quicknote").first().attr('id','tourQuicknote');
 		// Klickfunktion kopiert die entsprechende Textzeile in das Textfeld
 		$(".quicknote").click(function () {
 			//this ist auf dem link (<a>), daher holen wir uns erst das entsprechende <p> was ein sibling zu den relevanten <p>'s ist
@@ -342,6 +313,61 @@ $(document).ready(function () {
 
 		});
 
+	}
+
+	function initializeTour() {
+		var tour = new Tour({
+			name: 'wizzardtour2',
+			steps: [
+			{
+				  element: "#navigation-list",
+				  title: "Navigation",
+				  content: "Dies ist Ihre Navigation, hier können Sie relevante Themen aussuchen.",
+				  backdrop: true
+			},
+			{
+				  element: "#wikicontainer",
+				  title: "Informationsseite",
+				  content: "Hier können Sie alles relevante zum Thema lesen.",
+				  placement: "top",
+				  backdrop: true
+			},
+			{
+				element: "#textfeld textarea",
+				title: "Notizblock",
+				content: "Diesen Bereich können Sie als Notzblock benutzten. Er wird für jedes Thema separat gespeichert und angezeigt.",
+				backdrop: true
+			},
+			{
+				// hier werden leider alle anvisiert, außerdem sind die am anfang gar nicht da !
+				element: "#tourQuicknote",
+				title: "Schnellnotiz",
+				content: "Wenn Sie diesen Abschnitt notieren wollen, können Sie ihn mit diesem Knopf direkt in ihren Notizblock übernehmen.",
+				backdrop: true
+			},
+			{
+				element: "#save",
+				title: "Sitzung Speichern",
+				content: "Wenn Sie ihren Fortschritt Speichern wollen, laden sie ihre Sitzung hier als Datei herunter. Später laden Sie die Datei bei der Startseite wieder rein.",
+				placement: "top",
+				backdrop: true
+			},
+			{
+				element: "#export-form",
+				title: "Sitzung Exportieren",
+				content: "Exportiert Ihre aktuelle Sitzung in eine Word-Datei.",
+				placement: "top",
+				backdrop: true
+			},
+			{
+				element: "#close",
+				title: "Sitzung Schließen",
+				content: "Schließt die Sitzung (ohne zu Speichern) und kehrt zur Startseite zurück.",
+				placement: "top",
+				backdrop: true
+			}
+		]});
+		return tour;
 	}
 
 });
