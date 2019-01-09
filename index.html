@@ -8,6 +8,7 @@
 	<script type="text/javascript" src="src/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript" src="src/tmf.js"></script>
 	<script src="src/bootstrap-tour-standalone.min.js"></script>
+	<script src="src/dropzone.js"></script>
 </head>
 <!-- TODO: CSS auf Flex anpassen und Drag & Drop -->
 <body>
@@ -19,9 +20,6 @@
 			<h1 class="pew">PEW²</h1>
 			<p>Patienteninformation und Einwilligung: Wiki & Wizard</p>	
 		</div>
-		<div class="dummy-logo">
-			<img  src="src/pics/tmf-logo_klein.png">
-		</div>
 	</div>
 
 	<div id="start" >
@@ -29,8 +27,14 @@
 			<form action="view.php" id="dragdrop" method="post" enctype="multipart/form-data">
 				<p> Um ihre Session wiederherzustellen, wählen sie bitte ihre gespeicherte *.json Datei aus. </p>
 				<input id="session-file" type="file" name="session" accept=".json">
-				<input id="upload" type="submit"></p>	
-	</div>
+				<input id="upload" type="submit"></p>	 
+
+				<!-- <form action="view.php" class="dropzone">
+					<p> Um ihre Sitzung wiederherzustellen, wählen sie bitte ihre gespeicherte *.json Datei aus. </p>
+					<input id="upload" type="submit">
+				 </form> -->
+					
+	</div>	
 	<div id="actionbar">
 		<ul class="index-buttons">
 			<li id="neu">

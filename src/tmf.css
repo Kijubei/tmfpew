@@ -28,6 +28,7 @@ body {
 #tour {
 	margin:auto;
 	flex: 0.2;
+	display: flex;
 }
 
 #tour a {
@@ -36,13 +37,14 @@ body {
 	text-shadow: 1px 1px gray;
 	color: #C5D6EB;
 	font-size: x-large;
+	margin: auto;
 }
 
 .caption {
 	text-align: center;
 	/*margin: 0 0 15px 0;
 	background-color: green;*/
-	flex: 1;
+	flex: 0.6;
 }
 
 .pew {
@@ -157,7 +159,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	/*border: 1px solid black;*/
-	/* text-align: center; */
+	text-align: center;
 }
 
 #textfeld {

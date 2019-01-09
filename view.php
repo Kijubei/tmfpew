@@ -8,7 +8,8 @@
 	<script type="text/javascript" src="src/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript" src="src/tmf.js"></script>
 	<script src="src/bootstrap-tour-standalone.min.js"></script>
-	
+	<script src="src/dropzone.js"></script>
+
 </head>
 <body>
 
@@ -20,9 +21,6 @@
 			<h1 class="pew">PEW²</h1>
 			<p>Patienteninformation und Einwilligung: Wiki & Wizard</p>	
 		</div>
-		<!-- <div class="dummy-logo">
-			<img  src="src/pics/tmf-logo_klein.png">
-		</div> -->
 		<div id="tour">
 			<a href="#" class="floatingbutton" title="Hilfe! Wie geht das hier?">
 				?

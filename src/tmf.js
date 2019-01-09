@@ -9,7 +9,7 @@ $(document).ready(function () {
 	// bekommt die Url aus dem Storage von dem new button (siehe unten). Wichtig wenn es unterschiedliche Übersichtsseiten gibt.
 	var wikiUrl = sessionStorage.wikiUrl;
 	// für development (lokale pseudo wikiseiten):
-	wikiUrl = "http://localhost/tmfpew/wikiseiten/%C3%9Cbersicht%20%E2%80%93%20pew%20TMF.htm";
+	//wikiUrl = "http://localhost/tmfpew/wikiseiten/%C3%9Cbersicht%20%E2%80%93%20pew%20TMF.htm";
 
 	// Speichert die aktuelle itemID
 	var currentItemId;
@@ -335,11 +335,10 @@ $(document).ready(function () {
 			{
 				element: "#textfeld textarea",
 				title: "Notizblock",
-				content: "Diesen Bereich können Sie als Notzblock benutzten. Er wird für jedes Thema separat gespeichert und angezeigt.",
+				content: "Diesen Bereich können Sie als Notizblock benutzten. Er wird für jedes Thema separat gespeichert und angezeigt.",
 				backdrop: true
 			},
 			{
-				// hier werden leider alle anvisiert, außerdem sind die am anfang gar nicht da !
 				element: "#tourQuicknote",
 				title: "Schnellnotiz",
 				content: "Wenn Sie diesen Abschnitt notieren wollen, können Sie ihn mit diesem Knopf direkt in ihren Notizblock übernehmen.",
@@ -348,7 +347,7 @@ $(document).ready(function () {
 			{
 				element: "#save",
 				title: "Sitzung Speichern",
-				content: "Wenn Sie ihren Fortschritt Speichern wollen, laden sie ihre Sitzung hier als Datei herunter. Später laden Sie die Datei bei der Startseite wieder rein.",
+				content: "Wenn Sie ihren Fortschritt Speichern wollen, laden sie ihre Sitzung hier als Datei herunter. Später können Sie die Datei bei der Startseite verwenden.",
 				placement: "top",
 				backdrop: true
 			},
